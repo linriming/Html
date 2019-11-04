@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		<title>用户登录注册</title>
+		<link rel="stylesheet" href="css/login.css" />
+	</head>
+	<body>
+		<div class="login">
+			<h3>用户登录注册</h3>
+		<form name="login-form" action="#" method="post" id="login-form">
+			
+			<ul>
+				<li>
+					<label>用户名：</label>
+					<span><input type="text" placeholder="请输入用户名" required="required"/></span>
+				</li>
+				<li>
+					<label>密&nbsp;&nbsp; 码：</label>
+					<span><input type="password" placeholder="请输入密码" required="required"/></span>
+				</li>
+				<li>
+					<label>手机号：</label>
+					<span><input type="tel" placeholder="请输入手机号" pattern="[0-9]{11}"  required="required"/></span>
+				</li>
+				<li>
+					<label>电子邮件：</label>
+					<span><input type="email" placeholder="请输入电子邮件"  required="required"/></span>
+				</li>
+				<li>
+					<label>出生日期：</label>
+					<span><input type="date" value="/年/月/日" required="required"/></span>
+				</li>
+				<li>
+					<label>出生省份：</label>
+					<span>
+						<select required="required">
+							<option>请选择省</option>
+							<option>广东省</option>
+							<option>河南省</option>
+							<option>福建省</option>
+						</select>
+					</span>
+				</li>
+				<li>
+
+					<span><input type="checkbox" required="required"/></span>
+					<label>同意用户协议</label>
+				</li>
+				<li>
+					<span><input type="submit" value="立即注册"/></span>
+				</li>
+			</ul>		
+		</form>
+        </div>
+	</body>
+</html>

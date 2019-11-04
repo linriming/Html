@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>天气预报</title>
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="weather/iconfont.css" />
+		<script type="text/javascript" src="js/jquery-3.1.1.js" ></script>
+		<script>
+			$(function(){ 
+/*			 	$('#btn').click(function(){
+				 	var xmlhttp;
+					if (window.XMLHttpRequest)
+					  {// code for IE7+, Firefox, Chrome, Opera, Safari
+					  xmlhttp=new XMLHttpRequest();
+					  }
+					else
+					  {// code for IE6, IE5
+					  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					  }
+					  //console.log(xmlhttp);
+					  xmlhttp.onreadystatechange =function(){
+					  	if(this.readyState==4&&this.status==200){
+					  		obj = JSON.parse(this.responseText);
+					  		//alert(obj)
+					  		console.log(obj)
+					  		//$('#jsonshow').load(obj);
+					  	}else{
+					  		console.log(this.status+" "+this.readyState);
+					  	}
+					  
+					}
+					 xmlhttp.open("GET","http://wthrcdn.etouch.cn/weather_mini?city=广州",true);
+					 xmlhttp.send();
+			 	})*/
+			 	
+			 	var getWeather = function(city){
+                    $("#jsonshow").load("http://wthrcdn.etouch.cn/weather_mini?city="+city,function(responseTxt,statusTxt,xhr){
+				    if(statusTxt=="success"){
+				    	alert("数据加载成功！");
+				    }				      
+				    if(statusTxt=="error"){
+				    	alert("Error: "+xhr.status+": "+xhr.statusText);
+				    }	
+				    var json = JSON.parse(responseTxt)
+				    console.log(responseTxt)
+				    date = new Date();
+				    month = date.getMonth()+1+"月";
+				   $('#date').html(month+json.data.forecast[0].date+"&nbsp&nbsp&nbsp&nbsp"+"城市:"+city)
+				    //console.log(json.data.forecast[0].date)
+				    var now= json.data.forecast[0];				    
+				    $('.wendu').text(json.data.wendu)
+				    if(now.type=="多云"){
+				    	$('.weatherbox').css({'background':'url(img/duoyun.gif)',
+				    	'background-size':'100% 100%',
+				    	'background-repeat':'no-repeat'});
+				    	$('#ic').addClass('icon-duoyun')
+				    }else if(now.type=="晴"){
+				    	$('.weatherbox').css({'background':'url(img/qing.jpg)',
+				    	'background-size':'100% 100%',
+				    	'background-repeat':'no-repeat'});
+				    	$('#ic').addClass('icon-qing')
+				    }else if(now.type=="雷阵雨"){
+				    	$('.weatherbox').css({'background':'url(img/lei.gif)',
+				    	'background-size':'100% 100%',
+				    	'background-repeat':'no-repeat'})
+				    }else if(now.type=="阴"){
+				    	$('.weatherbox').css({'background':'url(img/yin.jpg)',
+				    	'background-size':'100% 100%',
+				    	'background-repeat':'no-repeat'})				    	
+				    }else if(now.type=="小雨"){
+				    	$('.weatherbox').css({'background':'url(img/rain.jpg)',
+				    	'background-size':'100% 100%',
+				    	'background-repeat':'no-repeat'})				    	
+				    }
+				    $('#type').text(now.type)
+				    $('#nowWD').text(now.low.slice(3,now.low.length)+"~"+now.high.slice(3,now.high.length))
+				    $('#wind').text(now.fengxiang)
+				    //未来的几天
+				    for(var i = 1;i<json.data.forecast.length;i++){
+				    	var forday = json.data.forecast[i];
+				    	$('.qiwen').eq(i-1).text(forday.low.slice(3,forday.low.length)+"~"+forday.high.slice(3,forday.high.length))
+				    	$('.feng').eq(i-1).text(forday.fengxiang);
+				    	$('.yun').eq(i-1).text(forday.type)
+				    	if(forday.type=="多云"){
+				    		$('.w-icon').eq(i-1).addClass('iconfont icon-duoyun');
+				    	}else if(forday.type=="晴"){
+				    		$('.w-icon').eq(i-1).addClass('iconfont icon-qing');
+				    	}else if(forday.type=="雷阵雨"){
+				    		
+				    		$('.w-icon').eq(i-1).addClass('iconfont icon-leidian')
+				    	}else if(forday.type=="阴"){
+				    		$('.w-icon').eq(i-1).addClass('iconfont icon-tianqi')
+				    	}else if(forday.type=="小雨"){
+				    		$('.w-icon').eq(i-1).addClass('iconfont icon-tianqi1')
+				    	}
+				    	$('.for-date').eq(i-1).text(month+"月"+forday.date)
+				    }
+				    $('li:gt(0)').mouseover(function(){
+				    	console.log($(this).children().eq(2).text())
+				    	if($(this).children().eq(2).text()=="晴"){
+				    		$('.weatherbox').css({'background':'url(img/qing.jpg)',
+				    	'background-size':'100% 100%',
+				    	'background-repeat':'no-repeat'});
+				    	}else if($(this).children().eq(2).text()=="多云"){
+				    		$('.weatherbox').css({'background':'url(img/duoyun.gif)',
+				    	'background-size':'100% 100%',
+				    	'background-repeat':'no-repeat'});
+				    	}else if($(this).children().eq(2).text()=="雷阵雨"){
+				    		$('.weatherbox').css({'background':'url(img/lei.gif)',
+				    	'background-size':'100% 100%',
+				    	'background-repeat':'no-repeat'});
+				    	}else if($(this).children().eq(2).text()=="小雨"){
+				    		$('.weatherbox').css({'background':'url(img/rain.jpg)',
+				    	'background-size':'100% 100%',
+				    	'background-repeat':'no-repeat'});				    		
+				    	}else if($(this).children().eq(2).text()=="阴"){
+				    		$('.weatherbox').css({'background':'url(img/yin.jpg)',
+				    	'background-size':'100% 100%',
+				    	'background-repeat':'no-repeat'});					    		
+				    	}
+				    })
+				    $('li:gt(0)').mouseout(function(){
+					    if(now.type=="多云"){
+					    	$('.weatherbox').css({'background':'url(img/duoyun.gif)',
+				    	'background-size':'100% 100%',
+				    	'background-repeat':'no-repeat'});
+					    	$('#ic').addClass('icon-duoyun')
+					    }else if(now.type=="晴"){
+					    	$('.weatherbox').css({'background':'url(img/qing.jpg)',
+				    	'background-size':'100% 100%',
+				    	'background-repeat':'no-repeat'});
+					    	$('#ic').addClass('icon-qing')
+					    }else if(now.type=="雷阵雨"){
+					    	$('.weatherbox').css({'background':'url(img/lei.gif)',
+				    	'background-size':'100% 100%',
+				    	'background-repeat':'no-repeat'});
+					    	$('#ic').addClass('icon-leidian')
+					    }else if(now.type=="阴"){
+				    	$('.weatherbox').css({'background':'url(img/yin.jpg)',
+				    	'background-size':'100% 100%',
+				    	'background-repeat':'no-repeat'})	
+				    	$('#ic').addClass('icon-tianqi')
+					    }else if(now.type=="小雨"){
+					    	$('.weatherbox').css({'background':'url(img/rain.jpg)',
+					    	'background-size':'100% 100%',
+					    	'background-repeat':'no-repeat'})
+					    	$('#ic').addClass('icon-tianqi1')
+					    }
+				    })
+				    $('.zhishu').html("相关指数："+json.data.ganmao);
+			 	 })			 		
+			 	}
+			 	
+			 	getWeather("广州");
+				$('#ok').click(function(){
+					var city = $('#ct').val()
+					getWeather(city);
+				 	})
+			 })
+		</script>
+	</head>
+	<body>
+<!--		<input type="button" id="btn" />-->
+		<div id="jsonshow"></div>
+		<div class="total">
+		<div class="weatherbox">
+			<div class="top">
+				<input type="text" id="ct" placeholder="请输入你的城市"/>
+				<input type="button" id="ok" value="确定"/>
+		   </div>			
+			<p id="date"></p>
+			<div class="detail">
+				<ul>
+					<li>
+						<p id="ic" class="iconfont leidian"></p>
+						<p id="wendu">
+							<span class="wendu"></span>
+							<span class="biaozhu">
+								<span>℃</span><br />
+								<span id="type"></span>
+							</span>
+						</p>
+						<p id="nowWD"></p>
+						<p id="wind"></p>
+					</li>
+					<li>
+						<p class="for-date"></p>
+						<p class="w-icon"></p>
+						<p class="yun"></p>
+						<p class="qiwen"></p>						
+						<p class="feng"></p>
+					</li>
+					<li>
+						<p class="for-date"></p>
+						<p class="w-icon"></p>
+						<p class="yun"></p>
+						<p class="qiwen"></p>
+						<p class="feng"></p>
+					</li>
+					<li>
+						<p class="for-date"></p>
+						<p class="w-icon"></p>
+						<p class="yun"></p>
+						<p class="qiwen"></p>
+						<p class="feng"></p>
+					</li>
+					<li>
+						<p class="for-date"></p>
+						<p class="w-icon"></p>
+						<p class="yun"></p>
+						<p class="qiwen"></p>
+						<p class="feng"></p>
+					</li>
+				</ul>
+			</div>
+			<div class="zhishu"></div>
+		</div>
+	</div>
+	</body>
+</html>

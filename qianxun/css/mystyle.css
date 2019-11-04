@@ -1,0 +1,227 @@
+body{
+	font-family: "微软雅黑";
+	font-size: 14px;
+}
+.screen1{
+	position: absolute;
+	height:100%;
+	width:100%;
+	background: url(../img/bg01.jpg);
+	background-size: 100% 100%;	
+}
+.screen1 span{
+	position: absolute;
+	display:inline-block;
+	
+}
+.cloud2{
+	height:100px;
+	width: 200px;
+	position: absolute;
+	left: 200px;
+	top: 50px;
+}
+.cloud2 img{
+	width: 100%;
+	height:100%;
+}
+.cloud1{
+	position: absolute;
+	right: 200px;
+	top: 50px;
+	height:180px;
+	width:220px;
+}
+.cloud1 img{
+	width: 100%;
+	height:100%;
+}
+.ball{
+	position: absolute;
+	height: 180px;
+	width: 150px;
+	top: 40px;
+	left: 50%;
+	margin-left: -90px;
+	animation: up-down 3s linear infinite;
+	-webkit-animation:up-down 3s linear infinite ;
+	background: url(../img/balloon.png);
+	background-size: 100% 100%;
+}
+@keyframes  up-down{
+	0%{
+		top:40px
+	}
+	50%{
+		top:20px;
+	}
+	100%{
+		top:40px;
+	}
+}
+.qianxun {
+	position: absolute;
+	height:62px;
+	width: 100px;
+	left: 34%;
+	top: 34%;
+	background: url(../img/logo.png);
+	background-size: 100% 100%;
+}
+.dot{
+	position: absolute;
+	height:100px;
+	width: 100px;
+	top: 32%;
+	left: 36%;
+
+}
+.find{
+	font-size: 60px;
+	color: #fff;
+	position: absolute;
+	top: 32%;
+	left: 48%;
+}
+.content p{
+	position: absolute;
+	top: 43%;
+	left: 50%;
+	margin-left: -200px;
+	height: 40px;
+	width: 400px;
+	text-align: center;
+	color: #fff;
+}
+ol,ul,div,p,li,body,a,h1{
+	margin: 0;
+	padding: 0;
+}
+ul,li,ol{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+h1{
+	position: absolute;
+	left: 30px;
+	top: 20px;
+}
+.top-logo img{
+	width: 100%;
+	height: 100%;
+}
+.music{
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	width:40px;
+	height: 40px;
+}
+.music img{
+	width: 100%;
+	height: 100%;
+	animation: circle 3s linear infinite;
+	-webkit-animation: circle 3s linear infinite;
+	
+}
+@keyframes circle{
+	from{
+		transform: rotate(0deg);
+	}
+	to{
+		
+		transform: rotate(360deg);
+	}
+}
+.aside{
+	position: fixed;
+	right:30px;
+	top:200px;
+	width:40px;
+	height:210px;
+}
+.aside ol{
+	display: block;	
+	width:100%;
+	height:100%;
+}
+.aside ol li{
+	margin:5px auto;
+	text-align: center;
+	display: block;
+	width:20px;
+	height:20px;
+	border: 1px solid #ca8c6b;
+	border-radius: 50%;
+}
+.aside ol li:nth-of-type(1){
+	background:url(../img/side_bg.png);
+	border: 0;
+	width:40px;
+	height:40px;
+	background-size: 100% 100%;
+	animation: circle 2s linear infinite;
+	-webkit-animation: circle 2s linear infinite;
+}
+.middle{
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	margin-left:-150px ;
+	height:100px;
+	width: 300px;
+}
+.download{
+	
+}
+.middle ul li{
+	float: left;
+}
+.nav-style{
+	opacity: 0.6;
+	background: #000;
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	height:50px;
+}
+.nav-style ul{
+	display: block;
+	margin:auto;
+	width: 1000px;
+	height:100%;
+	
+}
+.nav-style ul li{
+	display: block;
+	height:100%;
+	width: 20%;
+	
+	float: left;
+}
+.nav-style ul li a{
+	color: #fff;
+	width:100%;
+	height:100%;
+	display: block;
+	text-align: center;
+	padding-top: 20px;
+}
+.nav-style ul li:nth-of-type(1) a:hover{
+	background:#228bd6;
+}
+.nav-style ul li:nth-of-type(2) a:hover{
+	background:#cc3333;
+}
+.nav-style ul li:nth-of-type(3) a:hover{
+	background:#3aa624;
+}
+.nav-style ul li:nth-of-type(4) a:hover{
+	background:#c145cc;
+}
+.nav-style ul li:nth-of-type(5) a:hover{
+	background:#f2ca00;
+}

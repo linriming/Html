@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript" src="js/jquery-3.1.1.js" ></script>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			ul,li{
+				list-style: none;
+			}
+			.pic-box{
+				position: absolute;
+				width: 100%;
+			    margin: 0 auto;
+			}
+			.pic-box ul{
+				/*position: absolute;
+				z-index: 0;*/
+
+				width: 900px;
+				height: 600px;
+				display: block;
+				margin: 100px auto;
+				overflow: hidden;
+
+			}
+			.pic-box ul li{
+				font-size: 2em;
+				display: block;
+				position: relative;
+				box-sizing: border-box;
+				padding-right:10px;
+				float: left;
+				width: 25%;
+				height: 300px;
+				border: 4px solid #f60;
+			}
+			.pic-box ul li img{
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				z-index: 0;
+			}
+			.hidden{
+				display: block;
+				width: 100%;
+				height: 100%;
+				opacity: 0;
+				z-index: 99;
+			}
+			.show{
+				text-align: center;
+				line-height: 200px;
+				opacity: 0;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				z-index: 99;
+				box-shadow:0px 0px 90px 50px #FF6600 inset;
+			}
+			.box{
+				display: none;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				background: rgba(255,0,0,0.5);
+				z-index: 999;
+			}
+			.big-pic{
+				display: block;
+				margin: 100px auto;			
+				height: 600px;
+				width: 400px;
+				overflow: hidden;
+			}
+			.big-pic img{
+				width: 100%;
+				height: 92%;
+/*				animation: picbig 2s;*/
+			}
+			input{
+				display: block;
+				background: #666;
+				width: 50px;
+				height: 20px;
+				border: none;
+				animation-delay: 1s;
+				animation: picbig 2s;
+
+			}
+			#close{
+				margin: 0 auto;
+			}
+			#next{
+				float: right;
+				margin-right:50px ;
+			}
+			#pre{
+				float: left;
+				margin-left:50px ;
+			}
+			.scale{
+				animation: picbig 2s;
+			}
+			@keyframes picbig{
+				from{transform: scale(0,0);}
+				to{transform: scale(1,1);}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="pic-box">
+			<ul>
+				<li><img src="img/pic1.jpg"><span class="hidden"></span></li>
+				<li><img src="img/pic2.jpg"><span class="hidden"></span></li>
+				<li><img src="img/pic3.jpg"><span class="hidden"></span></li>
+				<li><img src="img/pic4.jpg"><span class="hidden"></span></li>
+				<li><img src="img/pic5.jpg"><span class="hidden"></span></li>
+				<li><img src="img/pic6.jpg"><span class="hidden"></span></li>
+				<li><img src="img/pic7.jpg"><span class="hidden"></span></li>
+				<li><img src="img/pic8.jpg"><span class="hidden"></span></li>
+			</ul>
+		</div>
+		<div class="box">
+			<div class="big-pic">
+				<input type="button" value="关闭" id="close"/>
+				<img src="" />
+				<input type="button" value="pre" id="pre"/>
+				<input type="button" value="next" id="next"/>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function(){
+				$('ul li span').mouseover(function(){
+					//console.log($(this).parent().index())
+					$(this).removeClass('hidden');
+					$(this).addClass('show').animate({opacity:"0.8"})
+					$(this).html("模特"+($(this).parent().index()+1));
+				})
+				$('ul li span').mouseout(function(){
+					$(this).removeClass('show')
+					$(this).addClass('hidden')
+					$(this).html("")
+				})
+				$('ul li').click(function(){
+					$('.box').css('display','block');
+					$('.big-pic').addClass('scale');
+					$('.big-pic img').attr('src',$(this).children().first().attr('src'));
+					//console.log($(this).children().first().attr('src'))
+				})
+				$("input[id='close']").click(function(){					
+					$('.box').css('display','none');
+				})
+				$("input[id='next']").click(function(){
+					//console.log($('.big-pic img').attr('src'));
+					$('.big-pic').css('display','none');
+					console.log($('.big-pic').css('display'))
+					var list  = $('ul li img');
+					for(var i=0;i<list.length;i++){
+						if(list.eq(i).attr('src')==$('.big-pic img').attr('src')){
+							if(i==7){
+								$('.big-pic').css('display','block').addClass('scale');
+								$('.big-pic img').attr('src',list.eq(0).attr('src'));break;
+							}else{
+								$('.big-pic').css('display','block').addClass('scale');
+								$('.big-pic img').attr('src',list.eq(i+1).attr('src')).addClass('scale');break;
+							}	
+						}
+					}
+				})
+				$("input[id='pre']").click(function(){
+					//console.log($('.big-pic img').attr('src'));
+					$('.big-pic').css('display','none');
+					console.log($('.big-pic').css('display'))
+					var list  = $('ul li img');
+					for(var i=0;i<list.length;i++){
+						if(list.eq(i).attr('src')==$('.big-pic img').attr('src')){
+							if(i==0){
+								$('.big-pic').css('display','block').addClass('scale');
+								$('.big-pic img').attr('src',list.eq(7).attr('src'));break;
+							}else{
+								$('.big-pic').css('display','block').addClass('scale');
+								$('.big-pic img').attr('src',list.eq(i-1).attr('src')).addClass('scale');break;
+							}	
+						}
+					}
+				})
+			})
+		</script>
+	</body>
+</html>

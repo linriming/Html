@@ -1,0 +1,112 @@
+*{
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+ul,li{
+	list-style: none;
+}
+#jsonshow{
+	position: absolute;
+	z-index: 0;
+}
+.total{
+	background: #fff;
+	position: absolute;
+	z-index: 999;
+	height: 100%;
+	width: 100%;
+}
+.weatherbox{
+	width: 500px;
+	height: 400px;
+	background: #ccc;
+	margin: 0 auto;
+}
+.top{
+	width: 80%;
+	height: 40px;
+	margin: 0 auto;
+}
+input[id=ct]{
+	width: 80%;
+	height: 100%;
+}
+input[type=button]{
+	height: 100%;
+	width: 15%;
+}
+.detail{
+	height: 250px;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-size:100% 100% ;
+}
+.detail ul{
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+.detail ul li{
+	text-align: center;
+	display: block;
+	float: left;
+	height: 100%;
+	width: 17%;
+	border-right: 1px solid #000;
+}
+.detail ul li .for-date{
+	padding-top:10px ;
+	line-height: 30px;
+	height: 80px;
+	width: 100%;
+}
+.detail ul li .w-icon{
+	height: 70px;
+	font-size: 60px;
+	padding-bottom: 5px;
+}
+.detail ul li .qiwen{
+	padding-bottom: 5px;
+}
+.detail ul li:nth-of-type(1){
+	width: 32%;
+}
+.detail ul li:nth-of-type(1) p{
+	margin-bottom: 5px;
+	overflow: hidden;
+	width: 100%;
+	text-align: center;
+}
+.detail ul li:nth-of-type(1) p[id=ic]{
+	padding-top: 10px;
+	height: 80px;
+}
+.detail ul li:nth-of-type(1) .leidian{
+	font-size: 60px;
+}
+.detail ul li:nth-of-type(1) p[id=wendu]{
+	height: 80px;
+	overflow: hidden;
+}
+.detail ul li:nth-of-type(1) p .wendu{
+	display: inline-block;
+	font-size: 60px;
+	height: 100%;
+	width: 55%;
+	float: left;
+	text-align: right;
+}
+.detail ul li:nth-of-type(1) p .biaozhu{
+	height: 100%;
+	width: 45%;
+	float: right;
+	overflow: hidden;
+	display: inline-block;
+	text-align: left;
+	padding-top: 20px;
+}
+.detail ul li:nth-of-type(1)>p>.biaozhu>span{
+	width: 100%;
+	height: 50%;
+}
